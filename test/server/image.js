@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 var Code = require('code');
 var Lab = require('lab');
 
@@ -12,7 +13,7 @@ var it = lab.test;
 
 var internals = {
     sampleSrcSet: 'http://fancyserver.com/image.jpg 600w, http://fancyserver.com/image2.jpg 1000w',
-    nativeOutput: '<img alt="text" src="http://fancyserver.com/image.jpg" srcset="http://fancyserver.com/image.jpg 600w, http://fancyserver.com/image2.jpg 1000w">',
+    nativeOutput: '<img alt="text" src="http://fancyserver.com/image.jpg" srcset="http://fancyserver.com/image.jpg 600w, http://fancyserver.com/image2.jpg 1000w"/>',
     renderOutput: '<img alt="text" src="http://fancyserver.com/image.jpg">'
 };
 
@@ -24,7 +25,7 @@ describe('Image Component - Testing as NodeJS', function () {
 
     it('uses default native support', function (done) {
 
-        var img = React.renderToStaticMarkup(
+        var img = ReactDOMServer.renderToStaticMarkup(
             <Img srcSet={internals.sampleSrcSet} alt='text'/>
         );
 
